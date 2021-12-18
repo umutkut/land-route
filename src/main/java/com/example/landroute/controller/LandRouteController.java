@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Locale;
+
 @RestController
 @DependsOn(value = "countryLoaderService")
 @RequiredArgsConstructor
@@ -24,7 +26,12 @@ public class LandRouteController {
     @GetMapping("/routing/{origin}/{destination}")
     public ResponseEntity<SuccessResponse> routing(@PathVariable String origin, @PathVariable String destination) {
         log.info("Route requested from {} to {}", origin, destination);
-        return new ResponseEntity<>(SuccessResponse.of(routeCalculatorService.calculateRoute(origin.toUpperCase(), destination.toUpperCase())), HttpStatus.OK);
+        return new ResponseEntity<>(
+                SuccessResponse.of(
+                        routeCalculatorService.calculateRoute(
+                                origin.toUpperCase(Locale.ENGLISH),
+                                destination.toUpperCase(Locale.ENGLISH))),
+                HttpStatus.OK);
     }
 
     @ExceptionHandler({IllegalArgumentException.class})

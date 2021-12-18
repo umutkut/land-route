@@ -15,4 +15,6 @@ public class Country {
 
     private final List<String> borders;
 
+    private final Region region;
+
 }

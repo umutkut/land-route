@@ -2,6 +2,7 @@ package com.example.landroute.application;
 
 
 import com.example.landroute.model.Country;
+import com.example.landroute.model.Region;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.io.FileReader;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 @Service("countryLoaderService")
 @Slf4j
@@ -36,7 +38,10 @@ public class CountryLoaderService {
                 var countryJson = iterator.next();
                 String cca3 = (String) countryJson.get("cca3");
                 List<String> borders = (List<String>) countryJson.get("borders");
-                Country country = new Country(cca3, borders);
+
+                String region = (String) countryJson.get("region");
+
+                Country country = new Country(cca3, borders, Region.valueOf(region.toUpperCase(Locale.ENGLISH)));
                 countryCache.save(country);
                 log.debug(i++ +" "+ country.toString());
             }
@@ -44,6 +49,5 @@ public class CountryLoaderService {
             e.printStackTrace();
         }
     }
-
 
 }

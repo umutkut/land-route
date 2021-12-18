@@ -3,6 +3,7 @@ package com.example.landroute.application;
 import com.example.landroute.infrastructure.CountryCache;
 import com.example.landroute.model.Country;
 import com.example.landroute.constants.ErrorMessage;
+import com.example.landroute.utils.PreconditionUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,8 @@ public class RouteCalculatorService {
     public List<String> calculateRoute(String origin, String destination) {
         var from = findCountryFromCca3(origin);
         var to = findCountryFromCca3(destination);
+
+        PreconditionUtils.checkJourneyPreconditions(from, to);
 
         Set<Country> visited = new HashSet<>();
         var route = findRoute(visited, from, to, new ArrayList<>());

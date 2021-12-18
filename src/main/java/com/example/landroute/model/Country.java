@@ -1,4 +1,4 @@
-package com.example.landroad.model;
+package com.example.landroute.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

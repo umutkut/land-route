@@ -1,7 +1,7 @@
-package com.example.landroad.infrastructure;
+package com.example.landroute.infrastructure;
 
-import com.example.landroad.application.ICountryCache;
-import com.example.landroad.model.Country;
+import com.example.landroute.application.ICountryCache;
+import com.example.landroute.model.Country;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

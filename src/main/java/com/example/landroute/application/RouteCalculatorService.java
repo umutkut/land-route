@@ -1,8 +1,8 @@
-package com.example.landroad.application;
+package com.example.landroute.application;
 
-import com.example.landroad.infrastructure.CountryCache;
-import com.example.landroad.model.Country;
-import com.example.landroad.util.Constants;
+import com.example.landroute.infrastructure.CountryCache;
+import com.example.landroute.model.Country;
+import com.example.landroute.constants.ErrorMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class RouteCalculatorService {
 
         Set<Country> visited = new HashSet<>();
         var route = findRoute(visited, from, to, new ArrayList<>());
-        if (route.isEmpty()) throw new IllegalArgumentException(Constants.PATH_NOT_FOUND);
+        if (route.isEmpty()) throw new IllegalArgumentException(ErrorMessage.PATH_NOT_FOUND);
         return route;
     }
 
@@ -49,7 +49,7 @@ public class RouteCalculatorService {
     }
 
     private Country findCountryFromCca3(String cca3) {
-        return countryCache.find(cca3).orElseThrow(() -> new IllegalArgumentException(Constants.COUNTRY_NOT_FOUND));
+        return countryCache.find(cca3).orElseThrow(() -> new IllegalArgumentException(ErrorMessage.COUNTRY_NOT_FOUND));
     }
 
 }

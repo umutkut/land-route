@@ -1,6 +1,6 @@
-package com.example.landroad.application;
+package com.example.landroute.application;
 
-import com.example.landroad.model.Country;
+import com.example.landroute.model.Country;
 
 import java.util.Optional;
 

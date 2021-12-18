@@ -1,4 +1,4 @@
-package com.example.landroad.response;
+package com.example.landroute.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

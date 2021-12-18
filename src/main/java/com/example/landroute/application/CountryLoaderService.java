@@ -1,7 +1,7 @@
-package com.example.landroad.application;
+package com.example.landroute.application;
 
 
-import com.example.landroad.model.Country;
+import com.example.landroute.model.Country;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

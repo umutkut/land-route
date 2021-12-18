@@ -1,10 +1,10 @@
-package com.example.landroad;
+package com.example.landroute;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LandRoadApplicationTests {
+class LandRouteApplicationTests {
 
     @Test
     void contextLoads() {

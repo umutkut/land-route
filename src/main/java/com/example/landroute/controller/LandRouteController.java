@@ -1,8 +1,8 @@
-package com.example.landroad.controller;
+package com.example.landroute.controller;
 
-import com.example.landroad.application.RouteCalculatorService;
-import com.example.landroad.response.ErrorResponse;
-import com.example.landroad.response.SuccessResponse;
+import com.example.landroute.application.RouteCalculatorService;
+import com.example.landroute.response.ErrorResponse;
+import com.example.landroute.response.SuccessResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.DependsOn;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @DependsOn(value = "countryLoaderService")
 @RequiredArgsConstructor
 @Slf4j
-public class LandRoadController {
+public class LandRouteController {
 
     private final RouteCalculatorService routeCalculatorService;
 

@@ -2,6 +2,7 @@ package com.example.landroad.application;
 
 
 import com.example.landroad.model.Country;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -12,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @Service("countryLoaderService")
+@Slf4j
 public class CountryLoaderService {
     private final ICountryCache countryCache;
 
@@ -36,7 +38,7 @@ public class CountryLoaderService {
                 List<String> borders = (List<String>) countryJson.get("borders");
                 Country country = new Country(cca3, borders);
                 countryCache.save(country);
-                System.out.println(i++ +" "+ country.toString());
+                log.debug(i++ +" "+ country.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();

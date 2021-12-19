@@ -24,4 +24,8 @@ class CountryCache implements ICountryCache {
         return idCountryMap.get(cca3);
     }
 
+    int size() {
+        return idCountryMap.size();
+    }
+
 }

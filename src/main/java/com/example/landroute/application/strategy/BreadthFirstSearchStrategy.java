@@ -19,6 +19,8 @@ public class BreadthFirstSearchStrategy implements IRoutingStrategy {
     private final ICountryCache countryCache;
     private final IPathCache pathCache;
 
+    //FIXME: Some countries have independent lands. This causes false output. The info in the json file is not sufficient to fix that issue.
+
     public final List<String> route(Country from, Country to) {
         log.info("Calculating route with {}", this.getClass().getSimpleName());
 

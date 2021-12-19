@@ -11,7 +11,6 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 
 import java.io.FileReader;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -20,7 +19,7 @@ import java.util.Locale;
 public class CountryLoaderService {
     private final ICountryCache countryCache;
 
-    public CountryLoaderService(ICountryCache countryCache){
+    public CountryLoaderService(ICountryCache countryCache) {
         this.countryCache = countryCache;
         loadCountriesFromJson();
     }
@@ -39,7 +38,7 @@ public class CountryLoaderService {
         }
     }
 
-    private void saveCountryFromJson(Object countryObj){
+    private void saveCountryFromJson(Object countryObj) {
         JSONObject countryJson = (JSONObject) countryObj;
 
         String cca3 = (String) countryJson.get("cca3");

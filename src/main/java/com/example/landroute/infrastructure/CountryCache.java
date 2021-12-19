@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Repository
-public class CountryCache implements ICountryCache {
+class CountryCache implements ICountryCache {
     private final Map<String, Country> idCountryMap = new HashMap<>();
 
     @Override

@@ -1,17 +1,17 @@
 package com.example.landroute.application;
 
-import com.example.landroute.infrastructure.CountryCache;
 import com.example.landroute.application.strategy.IRoutingStrategy;
+import com.example.landroute.infrastructure.ICountryCache;
 import com.example.landroute.utils.PreconditionUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
 public class RouteCalculatorService {
-    private final CountryCache countryCache;
+    private final ICountryCache countryCache;
     private final IRoutingStrategy routingStrategy;
 
 

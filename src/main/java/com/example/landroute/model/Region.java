@@ -14,9 +14,9 @@ public enum Region {
         EUROPE.borderSet = EnumSet.of(ASIA, AFRICA, EUROPE);
         ASIA.borderSet = EnumSet.of(AFRICA, EUROPE, ASIA);
         AFRICA.borderSet = EnumSet.of(EUROPE, ASIA, AFRICA);
-        OCEANIA.borderSet = EnumSet.noneOf(Region.class);
-        ANTARCTIC.borderSet = EnumSet.noneOf(Region.class);
-        AMERICAS.borderSet = EnumSet.noneOf(Region.class);
+        OCEANIA.borderSet = EnumSet.of(OCEANIA);
+        ANTARCTIC.borderSet = EnumSet.of(ANTARCTIC);
+        AMERICAS.borderSet = EnumSet.of(AMERICAS);
     }
 
     private EnumSet<Region> borderSet;

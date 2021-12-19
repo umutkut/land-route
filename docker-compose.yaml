@@ -1,25 +1,8 @@
 version: '3.8'
 
 services:
-  pwc-mongo-countries:
-    image: umutku/pwc-mongo-countries
-    container_name: pwc-mongo-countries
+  pwc-land-route:
+    image: umutku/pwc-land-route
+    container_name: pwc-land-route
     ports:
-      - 27017:27017
-    volumes:
-      - data:/data
-    environment:
-      - MONGO_INITDB_DATABASE=countries
-  mongo-express:
-    image: mongo-express
-    container_name: mongo-express
-    restart: always
-    environment:
-      - ME_CONFIG_MONGODB_SERVER=pwc-mongo-countries
-      - ME_CONFIG_MONGODB_PORT=27017
-    depends_on:
-      - pwc-mongo-countries
-    ports:
-      - 8081:8081
-volumes:
-  data: {}
+      - 8090:8090

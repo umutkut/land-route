@@ -1,6 +1,8 @@
 package com.example.landroute.controller;
 
 import com.example.landroute.application.RouteCalculatorService;
+import com.example.landroute.exception.InvalidCountryCodeException;
+import com.example.landroute.exception.PathNotFoundException;
 import com.example.landroute.response.ErrorResponse;
 import com.example.landroute.response.SuccessResponse;
 import lombok.RequiredArgsConstructor;
@@ -34,9 +36,23 @@ public class LandRouteController {
                 HttpStatus.OK);
     }
 
-    @ExceptionHandler({IllegalArgumentException.class})
-    public ResponseEntity<ErrorResponse> notFound(IllegalArgumentException ex) {
-        return new ResponseEntity<>(ErrorResponse.of(ex.getMessage()), HttpStatus.BAD_REQUEST);
+    @ExceptionHandler({InvalidCountryCodeException.class})
+    public ResponseEntity<ErrorResponse> invalidCountryCode(InvalidCountryCodeException ex) {
+        return new ResponseEntity<>(
+                ErrorResponse.of(
+                        ex.getMessage()
+                                + " Country Code: " + ex.getCountryCode()),
+                HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({PathNotFoundException.class})
+    public ResponseEntity<ErrorResponse> notFound(PathNotFoundException ex) {
+        return new ResponseEntity<>(
+                ErrorResponse.of(
+                        ex.getMessage()
+                                + " Origin Country: " + ex.getOriginCountryCode()
+                                + " Destination Country: " + ex.getDestinationCountryCode()),
+                HttpStatus.BAD_REQUEST);
     }
 
 

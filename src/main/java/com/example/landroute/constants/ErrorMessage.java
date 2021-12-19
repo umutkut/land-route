@@ -6,6 +6,6 @@ public class ErrorMessage {
     }
 
     public static final String PATH_NOT_FOUND = "Path not found.";
-    public static final String COUNTRY_NOT_FOUND = "Country does not exist.";
+    public static final String INVALID_COUNTRY = "Country code is not valid.";
 
 }

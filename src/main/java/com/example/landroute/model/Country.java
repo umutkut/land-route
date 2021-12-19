@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 public class Country {
 
-    private final String cca3;
+    private final String code;
 
     private final List<String> borders;
 

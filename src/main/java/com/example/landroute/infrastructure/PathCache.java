@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Repository
 @Slf4j
-public class PathCache implements IPathCache {
+class PathCache implements IPathCache {
     private final Table<String, String, List<String>> originDestinationPathTable = HashBasedTable.create();
 
     @Override

@@ -33,22 +33,23 @@ public class CountryLoaderService {
 
             JSONArray countries = (JSONArray) obj;
 
-            Iterator<JSONObject> iterator = countries.iterator();
-            int i = 0;
-            while (iterator.hasNext()) {
-                var countryJson = iterator.next();
-
-                String cca3 = (String) countryJson.get("cca3");
-                List<String> borders = (List<String>) countryJson.get("borders");
-                String region = (String) countryJson.get("region");
-
-                Country country = new Country(cca3, borders, Region.valueOf(region.toUpperCase(Locale.ENGLISH)));
-                countryCache.save(country);
-                log.debug(i++ +" "+ country.toString());
-            }
+            countries.forEach(this::saveCountryFromJson);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void saveCountryFromJson(Object countryObj){
+        JSONObject countryJson = (JSONObject) countryObj;
+
+        String cca3 = (String) countryJson.get("cca3");
+        List<String> borders = (List<String>) countryJson.get("borders");
+        String region = (String) countryJson.get("region");
+
+        Country country = new Country(cca3, borders, Region.valueOf(region.toUpperCase(Locale.ENGLISH)));
+        countryCache.save(country);
+
+        log.debug("Cached: {}", country);
     }
 
 }

@@ -1,6 +1,5 @@
 package com.example.landroute.infrastructure;
 
-import com.example.landroute.application.ICountryCache;
 import com.example.landroute.constants.ErrorMessage;
 import com.example.landroute.exception.InvalidCountryCodeException;
 import com.example.landroute.model.Country;
@@ -25,9 +24,4 @@ public class CountryCache implements ICountryCache {
         return idCountryMap.get(cca3);
     }
 
-
-    @Override
-    public Map<String, Country> getAll() {
-        return idCountryMap;
-    }
 }

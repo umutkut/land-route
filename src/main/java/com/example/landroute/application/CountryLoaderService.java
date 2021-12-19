@@ -1,6 +1,7 @@
 package com.example.landroute.application;
 
 
+import com.example.landroute.infrastructure.ICountryCache;
 import com.example.landroute.model.Country;
 import com.example.landroute.model.Region;
 import lombok.extern.slf4j.Slf4j;
@@ -36,9 +37,9 @@ public class CountryLoaderService {
             int i = 0;
             while (iterator.hasNext()) {
                 var countryJson = iterator.next();
+
                 String cca3 = (String) countryJson.get("cca3");
                 List<String> borders = (List<String>) countryJson.get("borders");
-
                 String region = (String) countryJson.get("region");
 
                 Country country = new Country(cca3, borders, Region.valueOf(region.toUpperCase(Locale.ENGLISH)));

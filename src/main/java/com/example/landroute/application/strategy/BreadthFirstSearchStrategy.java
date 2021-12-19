@@ -2,7 +2,8 @@ package com.example.landroute.application.strategy;
 
 import com.example.landroute.constants.ErrorMessage;
 import com.example.landroute.exception.PathNotFoundException;
-import com.example.landroute.infrastructure.CountryCache;
+import com.example.landroute.infrastructure.ICountryCache;
+import com.example.landroute.infrastructure.IPathCache;
 import com.example.landroute.model.Country;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,9 +16,11 @@ import java.util.*;
 @Service
 public class BreadthFirstSearchStrategy implements IRoutingStrategy {
 
-    private final CountryCache countryCache;
+    private final ICountryCache countryCache;
+    private final IPathCache pathCache;
 
     public final List<String> route(Country from, Country to) {
+        log.info("Calculating route with {}", this.getClass().getSimpleName());
 
         Map<Country, Country> previousCountry = new HashMap<>();
         Set<Country> visited = new HashSet<>();
@@ -63,6 +66,8 @@ public class BreadthFirstSearchStrategy implements IRoutingStrategy {
             path.add(curr.getCode());
             curr = previousCountry.get(curr);
         }
+
+        pathCache.cache(from.getCode(), to.getCode(), path);
         return path;
     }
 }

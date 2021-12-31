@@ -1,54 +1,32 @@
 package com.example.landroute.application;
 
-
-import com.example.landroute.infrastructure.ICountryCache;
-import com.example.landroute.model.Country;
-import com.example.landroute.model.Region;
+import com.example.landroute.infrastructure.dto.CountryDTO;
+import com.example.landroute.infrastructure.CountryRepository;
+import com.example.landroute.infrastructure.cache.ICountryCache;
+import com.example.landroute.domain.Country;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 
-import java.io.FileReader;
-import java.util.List;
-import java.util.Locale;
+import javax.annotation.PostConstruct;
 
 @Service("countryLoaderService")
+@RequiredArgsConstructor
 @Slf4j
 public class CountryLoaderService {
+
     private final ICountryCache countryCache;
+    private final CountryRepository countryRepository;
 
-    public CountryLoaderService(ICountryCache countryCache) {
-        this.countryCache = countryCache;
-        loadCountriesFromJson();
-    }
+    @PostConstruct
+    private void cacheCountries() {
+        var countryDTOs = countryRepository.findAll();
 
-    private void loadCountriesFromJson() {
-
-        JSONParser parser = new JSONParser();
-        try {
-            Object obj = parser.parse(new FileReader("countries.json"));
-
-            JSONArray countries = (JSONArray) obj;
-
-            countries.forEach(this::saveCountryFromJson);
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (CountryDTO dto : countryDTOs) {
+            countryCache.save(Country.fromDTO(dto));
+            log.info("Country cached: {}", dto.toString());
         }
     }
 
-    private void saveCountryFromJson(Object countryObj) {
-        JSONObject countryJson = (JSONObject) countryObj;
-
-        String cca3 = (String) countryJson.get("cca3");
-        List<String> borders = (List<String>) countryJson.get("borders");
-        String region = (String) countryJson.get("region");
-
-        Country country = new Country(cca3, borders, Region.valueOf(region.toUpperCase(Locale.ENGLISH)));
-        countryCache.save(country);
-
-        log.debug("Cached: {}", country);
-    }
-
 }
+

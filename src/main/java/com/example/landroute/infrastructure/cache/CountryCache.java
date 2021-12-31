@@ -1,8 +1,8 @@
-package com.example.landroute.infrastructure;
+package com.example.landroute.infrastructure.cache;
 
 import com.example.landroute.constants.ErrorMessage;
 import com.example.landroute.exception.InvalidCountryCodeException;
-import com.example.landroute.model.Country;
+import com.example.landroute.domain.Country;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

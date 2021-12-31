@@ -1,4 +1,4 @@
-package com.example.landroute.infrastructure;
+package com.example.landroute.infrastructure.cache;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;

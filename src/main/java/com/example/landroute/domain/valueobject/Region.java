@@ -1,4 +1,4 @@
-package com.example.landroute.model;
+package com.example.landroute.domain.valueobject;
 
 import java.util.EnumSet;
 

@@ -1,6 +1,7 @@
 package com.example.landroute.controller;
 
 import com.example.landroute.application.RouteCalculatorService;
+import com.example.landroute.domain.Country;
 import com.example.landroute.exception.InvalidCountryCodeException;
 import com.example.landroute.exception.PathNotFoundException;
 import com.example.landroute.response.ErrorResponse;
@@ -28,6 +29,7 @@ public class LandRouteController {
     @GetMapping("/routing/{origin}/{destination}")
     public ResponseEntity<SuccessResponse> routing(@PathVariable String origin, @PathVariable String destination) {
         log.info("Route requested from {} to {}", origin, destination);
+
         return new ResponseEntity<>(
                 SuccessResponse.of(
                         routeCalculatorService.calculateRoute(
@@ -38,22 +40,39 @@ public class LandRouteController {
 
     @ExceptionHandler({InvalidCountryCodeException.class})
     public ResponseEntity<ErrorResponse> invalidCountryCode(InvalidCountryCodeException ex) {
-        return new ResponseEntity<>(
-                ErrorResponse.of(
-                        ex.getMessage()
-                                + " Country Code: " + ex.getCountryCode()),
+        var errorResponse = ErrorResponse.of(
+                ex.getMessage()
+                        + " Country Code: "
+                        + ex.getCountryCode(),
                 HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<>(errorResponse,
+                errorResponse.getStatus());
     }
 
     @ExceptionHandler({PathNotFoundException.class})
     public ResponseEntity<ErrorResponse> notFound(PathNotFoundException ex) {
-        return new ResponseEntity<>(
-                ErrorResponse.of(
-                        ex.getMessage()
-                                + " Origin Country: " + ex.getOriginCountryCode()
-                                + " Destination Country: " + ex.getDestinationCountryCode()),
+        var errorResponse = ErrorResponse.of(
+                ex.getMessage()
+                        + " Origin Country: " + ex.getOriginCountryCode()
+                        + " Destination Country: " + ex.getDestinationCountryCode(),
                 HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(
+                errorResponse,
+                errorResponse.getStatus());
     }
 
+    @ExceptionHandler({Exception.class})
+    public ResponseEntity<ErrorResponse> unexpectedException(Exception ex) {
+        log.error("Exception occurred: ", ex);
 
+        var errorResponse = ErrorResponse.of(
+                ex.getMessage()
+                        + " Unexpected exception.",
+                HttpStatus.INTERNAL_SERVER_ERROR);
+
+        return new ResponseEntity<>(
+                errorResponse,
+                errorResponse.getStatus());
+    }
 }

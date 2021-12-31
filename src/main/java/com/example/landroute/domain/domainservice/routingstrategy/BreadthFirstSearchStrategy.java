@@ -1,10 +1,10 @@
-package com.example.landroute.application.strategy;
+package com.example.landroute.domain.domainservice.routingstrategy;
 
 import com.example.landroute.constants.ErrorMessage;
 import com.example.landroute.exception.PathNotFoundException;
-import com.example.landroute.infrastructure.ICountryCache;
-import com.example.landroute.infrastructure.IPathCache;
-import com.example.landroute.model.Country;
+import com.example.landroute.infrastructure.cache.ICountryCache;
+import com.example.landroute.infrastructure.cache.IPathCache;
+import com.example.landroute.domain.Country;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class BreadthFirstSearchStrategy implements IRoutingStrategy {
 
     //FIXME: Some countries have independent lands. This causes false output. The info in the json file is not sufficient to fix that issue.
 
-    public final List<String> route(Country from, Country to) {
+    public final List<String> findRoute(Country from, Country to) {
         log.info("Calculating route with {}", this.getClass().getSimpleName());
 
         Map<Country, Country> previousCountry = new HashMap<>();

@@ -9,12 +9,12 @@ import org.springframework.http.HttpStatus;
 public class ErrorResponse extends Response {
     String errorMessage;
 
-    private ErrorResponse(String errorMessage) {
-        super(HttpStatus.BAD_REQUEST);
+    private ErrorResponse(String errorMessage, HttpStatus status) {
+        super(status);
         this.errorMessage = errorMessage;
     }
 
-    public static ErrorResponse of(String errorMessage) {
-        return new ErrorResponse(errorMessage);
+    public static ErrorResponse of(String errorMessage, HttpStatus status) {
+        return new ErrorResponse(errorMessage, status);
     }
 }

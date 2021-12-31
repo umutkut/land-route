@@ -2,7 +2,7 @@ package com.example.landroute.utils;
 
 import com.example.landroute.constants.ErrorMessage;
 import com.example.landroute.exception.PathNotFoundException;
-import com.example.landroute.model.Country;
+import com.example.landroute.domain.Country;
 import com.google.common.base.Preconditions;
 
 import java.util.List;

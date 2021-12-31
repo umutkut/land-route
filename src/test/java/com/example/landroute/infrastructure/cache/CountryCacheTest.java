@@ -1,4 +1,5 @@
-package com.example.landroute.infrastructure;
+package com.example.landroute.infrastructure.cache;
+
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

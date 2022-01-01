@@ -82,7 +82,7 @@ The project consist of four component:
 - Approach on caching the routes does not contain any logic to delete unnecessary caches. This could cause too much memory usage with heavy traffic. 
   - Some LRU or LFU logic could be applied here. 
 - Tests should be improved.
-- Database security sould be set.
+- Database security should be set.
 ___
 ## HOW TO RUN:
 

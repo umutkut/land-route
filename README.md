@@ -78,9 +78,11 @@ The project consist of four component:
 ### OPEN TO IMPROVEMENT:
 - Missing information in the JSON file:
   - Some countries have independent lands from their main land. However this independency is not specified in the countries.json file. This application assumes there is no independent lands for a country which causes false outputs.
-  - Ex: There is a Russian land independent from the mainland of Russia above Poland. Which makes Russia and Poland neighbors. Russia and Georgia also has boarder from their main lands. With this information, the application can calculate land route from Poland to Georgia as: Poland -> Russia -> Georgia which is not correct.
-- Approach on caching the routes does not contain any logic to delete unnecessary caches. This could cause too much memory usage. 
+  - Ex: There is a Russian land independent of the mainland of Russia above Poland. Which makes Russia and Poland neighbors. Russia and Georgia also has boarder from their main lands. With this information, the application can calculate land route from Poland to Georgia as: Poland -> Russia -> Georgia which is not correct.
+- Approach on caching the routes does not contain any logic to delete unnecessary caches. This could cause too much memory usage with heavy traffic. 
   - Some LRU or LFU logic could be applied here. 
+- Tests should be improved.
+- Database security sould be set.
 ___
 ## HOW TO RUN:
 

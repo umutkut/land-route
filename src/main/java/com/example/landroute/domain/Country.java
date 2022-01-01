@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @ToString
@@ -33,18 +34,12 @@ public class Country {
         return new Country(new CountryCode(dto.getCca3()), dto.getBorders(), Region.valueOf(dto.getRegion().toUpperCase(Locale.ENGLISH)));
     }
 
-    public Route findRouteTo(Country destination, ICountryCache countryCache, IRouteCache pathCache) {
+    public Route findRouteTo(Country destination, Map<String, Country> idCountryMap) {
         log.info("Finding route from: {} to: {}", this.code, destination.code);
 
         PreconditionUtils.checkJourneyPreconditions(this, destination);
 
-
-        if (pathCache.contains(this.code.getValue(), destination.code.getValue())) {
-            log.info("Returning precalculated route from cache.");
-            return pathCache.getCachedPath(this.code.getValue(), destination.code.getValue());
-        }
-
-        IRoutingStrategy routingStrategy = new BreadthFirstSearchStrategy(countryCache, pathCache);
+        IRoutingStrategy routingStrategy = new BreadthFirstSearchStrategy(idCountryMap);
         return routingStrategy.findRoute(this, destination);
     }
 

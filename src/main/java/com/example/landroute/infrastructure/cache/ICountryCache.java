@@ -2,8 +2,12 @@ package com.example.landroute.infrastructure.cache;
 
 import com.example.landroute.domain.Country;
 
+import java.util.Map;
+
 public interface ICountryCache {
-    void save(Country country);
+    void cache(Country country);
 
     Country get(String code);
+
+    Map<String, Country> getAll();
 }

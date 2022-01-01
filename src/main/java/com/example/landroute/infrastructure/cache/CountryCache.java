@@ -13,7 +13,7 @@ class CountryCache implements ICountryCache {
     private final Map<String, Country> idCountryMap = new HashMap<>();
 
     @Override
-    public void save(Country country) {
+    public void cache(Country country) {
         idCountryMap.put(country.getCode().getValue(), country);
     }
 
@@ -22,6 +22,11 @@ class CountryCache implements ICountryCache {
         if (!idCountryMap.containsKey(cca3)) throw new InvalidCountryCodeException(ErrorMessage.INVALID_COUNTRY, cca3);
 
         return idCountryMap.get(cca3);
+    }
+
+    @Override
+    public Map<String, Country> getAll() {
+        return idCountryMap;
     }
 
     int size() {

@@ -9,26 +9,26 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Slf4j
 class RouteCache implements IRouteCache {
-    private final Table<String, String, Route> originDestinationPathTable = HashBasedTable.create();
+    private final Table<String, String, Route> originDestinationRouteTable = HashBasedTable.create();
 
     @Override
     public void cache(Route route) {
         String origin = route.getOrigin().getValue();
         String destination = route.getDestination().getValue();
 
-        originDestinationPathTable.put(origin, destination, route);
+        originDestinationRouteTable.put(origin, destination, route);
 
-        originDestinationPathTable.put(destination, origin, route.getReversed());
+        originDestinationRouteTable.put(destination, origin, route.getReversed());
     }
 
     @Override
     public boolean contains(String origin, String destination) {
-        return originDestinationPathTable.contains(origin, destination);
+        return originDestinationRouteTable.contains(origin, destination);
     }
 
     @Override
     public Route getCachedPath(String origin, String destination) {
         log.info("{} - {} read from cache", origin, destination);
-        return originDestinationPathTable.get(origin, destination);
+        return originDestinationRouteTable.get(origin, destination);
     }
 }

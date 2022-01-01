@@ -23,7 +23,7 @@ public class CountryLoaderService {
         var countryDTOs = countryRepository.findAll();
 
         for (CountryDTO dto : countryDTOs) {
-            countryCache.save(Country.fromDTO(dto));
+            countryCache.cache(Country.fromDTO(dto));
             log.info("Country cached: {}", dto.toString());
         }
     }

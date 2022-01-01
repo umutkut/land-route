@@ -6,4 +6,6 @@ public interface ICountryCache {
     void cache(Country country);
 
     Country get(String code);
+
+    boolean hasCached();
 }

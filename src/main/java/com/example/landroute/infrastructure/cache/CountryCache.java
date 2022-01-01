@@ -5,12 +5,13 @@ import com.example.landroute.domain.Country;
 import com.example.landroute.exception.InvalidCountryCodeException;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 class CountryCache implements ICountryCache {
-    private final Map<String, Country> idCountryMap = new HashMap<>();
+    private final Map<String, Country> idCountryMap = new ConcurrentHashMap<>();
+    private static final int NUMBER_OF_EXPECTED_COUNTRIES = 250;
 
     @Override
     public void cache(Country country) {
@@ -23,7 +24,12 @@ class CountryCache implements ICountryCache {
 
         return idCountryMap.get(cca3);
     }
-    
+
+    @Override
+    public boolean hasCached() {
+        return this.size() == NUMBER_OF_EXPECTED_COUNTRIES;
+    }
+
     int size() {
         return idCountryMap.size();
     }

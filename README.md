@@ -56,9 +56,9 @@ The project consist of four component:
 
 - The main SpringBoot application that handles the REST requests.
 - As REST API is faster and more popular alternative over other standards that uses HTTP protocol, RESTfull approach is
-  used.
+  used. (Also required.)
 - SpringBoot framework have been chosen in this project due to its dependency injection advantage, ease of development
-  and so on.
+  and so on. (Also required.)
 - The application has two caching model,
     - On startup, the application caches the data from the database to memory. Since the data size is quite low, caching
       all data has not come to concern. Along with that, increases the performance dramatically.

@@ -2,7 +2,7 @@
 
 ___
 
-## ABOUT TASK:
+## ABOUT TASK
 
 Task is to create a simple Spring Boot service, that is able to calculate any possible land route from one country to
 another. The objective is to take a list of country data in JSON format and calculate the route by utilizing individual
@@ -84,7 +84,7 @@ The project consist of four component:
 - Tests should be improved.
 - Database security should be set.
 ___
-## HOW TO RUN:
+## HOW TO RUN
 
 All related containers have been set in docker-compose.yaml.
 
@@ -94,7 +94,7 @@ In order to run the application,
 
 `docker compose up -d`
 ___
-## END POINT:
+## END POINT
 
 **GET** localhost:8090/routing/{origin}/{destination}
 

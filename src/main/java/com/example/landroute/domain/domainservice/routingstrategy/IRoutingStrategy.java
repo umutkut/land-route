@@ -1,9 +1,8 @@
 package com.example.landroute.domain.domainservice.routingstrategy;
 
 import com.example.landroute.domain.Country;
-
-import java.util.List;
+import com.example.landroute.domain.valueobject.Route;
 
 public interface IRoutingStrategy {
-    List<String> findRoute(Country from, Country to);
+    Route findRoute(Country from, Country to);
 }

@@ -45,6 +45,7 @@ class RouteCalculatorServiceTest {
             Assertions.assertEquals(ErrorMessage.PATH_NOT_FOUND, exception.getMessage());
         }
     }
+
     private void testEuropeAndAsia() {
         var route = routeCalculatorService.calculateRoute("FRA", "CHN");
         Assertions.assertIterableEquals(List.of("FRA",

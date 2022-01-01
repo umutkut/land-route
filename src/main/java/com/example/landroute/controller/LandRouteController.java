@@ -1,7 +1,6 @@
 package com.example.landroute.controller;
 
 import com.example.landroute.application.RouteCalculatorService;
-import com.example.landroute.domain.Country;
 import com.example.landroute.exception.InvalidCountryCodeException;
 import com.example.landroute.exception.PathNotFoundException;
 import com.example.landroute.response.ErrorResponse;

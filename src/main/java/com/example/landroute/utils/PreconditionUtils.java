@@ -1,11 +1,8 @@
 package com.example.landroute.utils;
 
 import com.example.landroute.constants.ErrorMessage;
-import com.example.landroute.exception.PathNotFoundException;
 import com.example.landroute.domain.Country;
-import com.google.common.base.Preconditions;
-
-import java.util.List;
+import com.example.landroute.exception.PathNotFoundException;
 
 public class PreconditionUtils {
     private PreconditionUtils() {
@@ -16,8 +13,8 @@ public class PreconditionUtils {
         if (!(hasAnyBoarder(origin, destination)
                 && regionsConnected(origin, destination)))
             throw new PathNotFoundException(ErrorMessage.PATH_NOT_FOUND,
-                    origin.getCode(),
-                    destination.getCode());
+                    origin.getCode().toString(),
+                    destination.getCode().toString());
     }
 
     private static boolean hasAnyBoarder(Country origin, Country destination) {
@@ -31,7 +28,4 @@ public class PreconditionUtils {
         return allowableRegions.contains(destinationRegion);
     }
 
-    public static void checkRouteNotEmpty(List<String> route) {
-        Preconditions.checkArgument(!route.isEmpty());
-    }
 }

@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class PathCacheTest {
     @Autowired
-    PathCache pathCache;
+    RouteCache pathCache;
 
     @Autowired
     RouteCalculatorService routeCalculatorService;

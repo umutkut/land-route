@@ -1,10 +1,11 @@
 package com.example.landroute.domain.domainservice.routingstrategy;
 
 import com.example.landroute.constants.ErrorMessage;
+import com.example.landroute.domain.Country;
+import com.example.landroute.domain.valueobject.Route;
 import com.example.landroute.exception.PathNotFoundException;
 import com.example.landroute.infrastructure.cache.ICountryCache;
-import com.example.landroute.infrastructure.cache.IPathCache;
-import com.example.landroute.domain.Country;
+import com.example.landroute.infrastructure.cache.IRouteCache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,11 +18,11 @@ import java.util.*;
 public class BreadthFirstSearchStrategy implements IRoutingStrategy {
 
     private final ICountryCache countryCache;
-    private final IPathCache pathCache;
+    private final IRouteCache routeCache;
 
     //FIXME: Some countries have independent lands. This causes false output. The info in the json file is not sufficient to fix that issue.
 
-    public final List<String> findRoute(Country from, Country to) {
+    public final Route findRoute(Country from, Country to) {
         log.info("Calculating route with {}", this.getClass().getSimpleName());
 
         Map<Country, Country> previousCountry = new HashMap<>();
@@ -58,18 +59,21 @@ public class BreadthFirstSearchStrategy implements IRoutingStrategy {
         return calculatePath(previousCountry, from, to, current);
     }
 
-    private List<String> calculatePath(Map<Country, Country> previousCountry, Country from, Country to, Country current) {
+    private Route calculatePath(Map<Country, Country> previousCountry, Country from, Country to, Country current) {
         if (!current.equals(from))
-            throw new PathNotFoundException(ErrorMessage.PATH_NOT_FOUND, from.getCode(), to.getCode());
+            throw new PathNotFoundException(ErrorMessage.PATH_NOT_FOUND, from.getCode().getValue(), to.getCode().getValue());
 
         List<String> path = new ArrayList<>();
         Country curr = from;
         while (curr != null) {
-            path.add(curr.getCode());
+            path.add(curr.getCode().getValue());
             curr = previousCountry.get(curr);
         }
 
-        pathCache.cache(from.getCode(), to.getCode(), path);
-        return path;
+        var route = new Route(from.getCode(), to.getCode(), path);
+
+        routeCache.cache(route);
+
+        return route;
     }
 }

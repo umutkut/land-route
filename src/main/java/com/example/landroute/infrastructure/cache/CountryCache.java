@@ -1,8 +1,8 @@
 package com.example.landroute.infrastructure.cache;
 
 import com.example.landroute.constants.ErrorMessage;
-import com.example.landroute.exception.InvalidCountryCodeException;
 import com.example.landroute.domain.Country;
+import com.example.landroute.exception.InvalidCountryCodeException;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -14,7 +14,7 @@ class CountryCache implements ICountryCache {
 
     @Override
     public void save(Country country) {
-        idCountryMap.put(country.getCode(), country);
+        idCountryMap.put(country.getCode().getValue(), country);
     }
 
     @Override

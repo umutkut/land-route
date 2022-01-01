@@ -8,6 +8,4 @@ public interface ICountryCache {
     void cache(Country country);
 
     Country get(String code);
-
-    Map<String, Country> getAll();
 }

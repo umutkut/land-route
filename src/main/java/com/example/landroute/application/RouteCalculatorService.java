@@ -1,5 +1,6 @@
 package com.example.landroute.application;
 
+import com.example.landroute.domain.domainservice.routingstrategy.IRoutingStrategy;
 import com.example.landroute.infrastructure.cache.ICountryCache;
 import com.example.landroute.infrastructure.cache.IRouteCache;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.List;
 public class RouteCalculatorService {
     private final ICountryCache countryCache;
     private final IRouteCache routeCache;
-
+    private final IRoutingStrategy routingStrategy;
 
     public List<String> calculateRoute(String origin, String destination) {
         if (routeCache.contains(origin, destination)) {
@@ -25,7 +26,7 @@ public class RouteCalculatorService {
         var from = countryCache.get(origin);
         var to = countryCache.get(destination);
 
-        var route = from.findRouteTo(to, countryCache.getAll());
+        var route = from.findRouteTo(to, routingStrategy);
         routeCache.cache(route);
 
         return route.getPath();

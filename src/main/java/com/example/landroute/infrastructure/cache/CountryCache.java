@@ -23,12 +23,7 @@ class CountryCache implements ICountryCache {
 
         return idCountryMap.get(cca3);
     }
-
-    @Override
-    public Map<String, Country> getAll() {
-        return idCountryMap;
-    }
-
+    
     int size() {
         return idCountryMap.size();
     }

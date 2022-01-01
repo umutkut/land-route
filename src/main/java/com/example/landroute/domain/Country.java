@@ -34,12 +34,11 @@ public class Country {
         return new Country(new CountryCode(dto.getCca3()), dto.getBorders(), Region.valueOf(dto.getRegion().toUpperCase(Locale.ENGLISH)));
     }
 
-    public Route findRouteTo(Country destination, Map<String, Country> idCountryMap) {
+    public Route findRouteTo(Country destination, IRoutingStrategy routingStrategy) {
         log.info("Finding route from: {} to: {}", this.code, destination.code);
 
         PreconditionUtils.checkJourneyPreconditions(this, destination);
 
-        IRoutingStrategy routingStrategy = new BreadthFirstSearchStrategy(idCountryMap);
         return routingStrategy.findRoute(this, destination);
     }
 

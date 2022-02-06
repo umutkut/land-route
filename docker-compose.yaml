@@ -10,6 +10,9 @@ services:
       - MONGO_INITDB_DATABASE=countries
     networks:
       - main-network
+    profiles:
+      - prod
+      - dev
 
   mongo-express:
     image: mongo-express
@@ -24,6 +27,9 @@ services:
       - 8081:8081
     networks:
       - main-network
+    profiles:
+      - prod
+      - dev
 
   json-loader:
     image: umutku/country-loader-script
@@ -32,6 +38,9 @@ services:
       - main-network
     depends_on:
       - pwc-mongo-countries
+    profiles:
+      - prod
+      - dev
 
   pwc-land-route:
     image: umutku/pwc-land-route
@@ -42,8 +51,10 @@ services:
       - json-loader
     ports:
       - 8090:8090
-
-
+    profiles:
+      - prod
+    environment:
+       - "SPRING_PROFILES_ACTIVE=prod"
 networks:
   main-network:
     name: pwc-network

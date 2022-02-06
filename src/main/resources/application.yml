@@ -1,0 +1,18 @@
+server:
+  port: 8090
+
+spring:
+  data:
+    mongodb:
+      database: countries
+      host: localhost
+      port: 27017
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  data:
+    mongodb:
+      host: pwc-mongo-countries

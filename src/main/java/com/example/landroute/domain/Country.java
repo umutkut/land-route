@@ -1,12 +1,9 @@
 package com.example.landroute.domain;
 
-import com.example.landroute.domain.domainservice.routingstrategy.BreadthFirstSearchStrategy;
 import com.example.landroute.domain.domainservice.routingstrategy.IRoutingStrategy;
 import com.example.landroute.domain.valueobject.CountryCode;
 import com.example.landroute.domain.valueobject.Region;
 import com.example.landroute.domain.valueobject.Route;
-import com.example.landroute.infrastructure.cache.ICountryCache;
-import com.example.landroute.infrastructure.cache.IRouteCache;
 import com.example.landroute.infrastructure.dto.CountryDTO;
 import com.example.landroute.utils.PreconditionUtils;
 import lombok.Getter;
@@ -16,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 @RequiredArgsConstructor
 @ToString

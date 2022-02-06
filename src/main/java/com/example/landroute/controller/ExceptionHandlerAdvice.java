@@ -6,13 +6,14 @@ import com.example.landroute.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 @Slf4j
-public class ExceptionHandler {
+public class ExceptionHandlerAdvice {
 
-    @org.springframework.web.bind.annotation.ExceptionHandler({InvalidCountryCodeException.class})
+    @ExceptionHandler({InvalidCountryCodeException.class})
     public ResponseEntity<ErrorResponse> invalidCountryCode(InvalidCountryCodeException ex) {
         var errorResponse = ErrorResponse.of(
                 ex.getMessage()
@@ -24,7 +25,7 @@ public class ExceptionHandler {
                 errorResponse.getStatus());
     }
 
-    @org.springframework.web.bind.annotation.ExceptionHandler({PathNotFoundException.class})
+    @ExceptionHandler({PathNotFoundException.class})
     public ResponseEntity<ErrorResponse> notFound(PathNotFoundException ex) {
         var errorResponse = ErrorResponse.of(
                 ex.getMessage()
@@ -36,7 +37,8 @@ public class ExceptionHandler {
                 errorResponse.getStatus());
     }
 
-    @org.springframework.web.bind.annotation.ExceptionHandler({Exception.class})
+
+    @ExceptionHandler({Exception.class})
     public ResponseEntity<ErrorResponse> unexpectedException(Exception ex) {
         log.error("Exception occurred: ", ex);
 
@@ -49,4 +51,5 @@ public class ExceptionHandler {
                 errorResponse,
                 errorResponse.getStatus());
     }
+
 }
